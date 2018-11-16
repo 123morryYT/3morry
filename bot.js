@@ -424,7 +424,7 @@ var prefix = "+";
 
   
     client.on("message", message => {
- if (message.content === "+games") {
+ if (message.content === "+help") {
   const embed = new Discord.RichEmbed()
       .setColor("RANDOM")
       .setDescription(` ✧▬▬▬▬▬▬ Commands ▬▬▬▬▬▬✧
@@ -434,7 +434,8 @@ var prefix = "+";
 +avatar | to see your avatar
 +id | to see your id
 +mute | to mute members
-soon
++server | to see server info
++bc | bordecast
 
  
  ✧▬▬▬▬▬▬ Commands ▬▬▬▬▬▬✧`)
