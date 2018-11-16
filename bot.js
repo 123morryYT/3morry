@@ -40,7 +40,7 @@ client.on('message', msg => {//iiM0dy_EG#7040
                          .setDescription(`**
  
 ╔[❖══════ஜ۩۞۩ஜ══════❖]╗
-   Prefix   =    '$'
+   Prefix   =    '+'
 ╚[❖══════ஜ۩۞۩ஜ══════❖]╝
 ╔[❖══════ஜ۩۞۩ஜ══════❖]╗
     Admin   ✻  Commands
