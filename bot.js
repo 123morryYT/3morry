@@ -68,7 +68,6 @@ client.on('message', msg => {//iiM0dy_EG#7040
 ❖ +allbots   ➾ to see all bots in the server |  عشان تشوفي عدد البوتات الفي سيرفرك
 ❖ رابط      ➾ to get your link in the server | عشان تجيب الرابط حق السيرفر
 ❖ +invites ➾ to see what do you get members in the server | عشان تشوف كم عضو جبت للسيرفر
-❖ +title   ➾  |
 ==================================================================
 Server support : Soon!!
 ==================================================================
@@ -84,26 +83,6 @@ Server support : Soon!!
 
 
 
-
-
-
-
-
-    client.on('message', message => {
-        let tit = message.content.split(" ").slice(1).join(" ");
-        if(message.content.startsWith(prefix + "title")) {
-        if(!profile[message.author.id].tite) profile[message.author.id].tite = "Hey im using Super"
-        if(!tit) {
-            message.channel.send("**Usage: <title <something>**");
-        } else {
-            profile[message.author.id].tite = tit
-            message.channel.send(`:ok:`)
-        }
-        }
-        fs.writeFile('profile.json', JSON.stringify(profile), (err) => {
-if (err) console.error(err);
-})
-    })
 
 
 
