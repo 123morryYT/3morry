@@ -442,23 +442,27 @@ client.on('message', message => {
 
 
 
-client.on('message', message => {
-  if (message.content.startsWith(prefix +"avatar")) {
-if(!message.channel.guild) return;
-      var mentionned = message.mentions.users.first();
-  var client;
-    if(mentionned){
-        var client = mentionned; } else {
-        var client = message.author;
-    }
-      const embed = new Discord.RichEmbed()
-                         .addField('Requested by:', "<@" + message.author.id + ">")
-      .setColor(000000)
-      .setImage(`${client.avatarURL}`)
-    message.channel.sendEmbed(embed);
-  }
+client.on('message', message =>{
+    let args = message.content.split(' ');
+    if(args[0] === `${prefix}avatar`){
+        let mentions = message.mentions.members.first()
+        if(!mentions) {
+          let sicon = message.author.avatarURL
+          let embed = new Discord.RichEmbed()
+          .setImage(message.author.avatarURL)
+          .setColor("#f7abab") 
+          .setDescription(`**${message.author.username}#${message.author.discriminator}**'s avatar :`);
+          message.channel.send({embed})
+        } else {
+          let sicon = mentions.user.avatarURL
+          let embed = new Discord.RichEmbed()
+          .setColor("#f7abab")
+          .setDescription(`**${mentions.user.username}#${mentions.user.discriminator}**'s avatar :`)
+          .setImage(sicon)
+          message.channel.send({embed})
+        }
+    };
 });
-
 
 
 
@@ -531,34 +535,32 @@ var mentionned = message.mentions.members.first();
 
 
  
-client.on('message', message => { 
-           if (message.content.startsWith(prefix + "id")) {
-     var args = message.content.split(" ").slice(1);
-     let user = message.mentions.users.first();
-     var men = message.mentions.users.first();
-        var heg;
-        if(men) {
-            heg = men
-        } else {
-            heg = message.author
-        }
-      var mentionned = message.mentions.members.first();
-         var h;
-        if(mentionned) {
-            h = mentionned
-        } else {
-            h = message.member
-        }
-               moment.locale('ar-TN');
-      var id = new  Discord.RichEmbed()
-      .setAuthor(message.author.username, message.author.avatarURL) 
-    .setColor("#707070")
-    .addField(': دخولك لديسكورد قبل', `${moment(heg.createdTimestamp).format('YYYY/M/D HH:mm:ss')} **\n** \`${moment(heg.createdTimestamp).fromNow()}\`` ,true) 
-    .addField(': انضمامك لسيرفر قبل', `${moment(h.joinedAt).format('YYYY/M/D HH:mm:ss')} \n \`${moment(h.joinedAt).fromNow()}\``, true)               
-    .setFooter(`OverBot`, 'https://images-ext-2.discordapp.net/external/JpyzxW2wMRG2874gSTdNTpC_q9AHl8x8V4SMmtRtlVk/https/orcid.org/sites/default/files/files/ID_symbol_B-W_128x128.gif')                                 
-    .setThumbnail(heg.avatarURL);
-    message.channel.send(id)
-}       });
+ 
+client.on('message', message => {
+   if (message.content.startsWith("+id")) {
+                if(!message.channel.guild) return message.reply('** This command only for servers**');
+
+               var mentionned = message.mentions.users.first();
+    var mentionavatar;
+      if(mentionned){
+          var mentionavatar = mentionned;
+      } else {
+          var mentionavatar = message.author;
+          
+      }
+   let embed = new Discord.RichEmbed()
+  .setColor("RANDOM")
+   .setThumbnail(`${mentionavatar.avatarURL}`)
+  .addField("🏅 Name:",`<@` + `${mentionavatar.id}` + `>`, true)
+  .addField('🎤 Discrim:',"#" +  `${mentionavatar.discriminator}`, true)
+   .addField("🆔 ID:", "**[" + `${mentionavatar.id}` + "]**", true)
+  .addField("📅 Create At:", "**[" + `${mentionavatar.createdAt}` + "]**", true)
+     
+     
+  message.channel.sendEmbed(embed);
+  console.log('[id] Send By: ' + message.author.username)
+    }
+});
 
 
  
