@@ -331,6 +331,119 @@ message.channel.send({embed:embed});
 
 
 
+client.on('message', function(msg) {
+    const prefix = '+'
+    if(msg.content.startsWith ('+server')) {
+      let embed = new Discord.RichEmbed()
+      .setColor('RANDOM')
+      .setThumbnail(msg.guild.iconURL)
+      .setTitle(`Showing Details Of  **${msg.guild.name}*`)
+      .addField('🌐** server type**',`[** __${msg.guild.region}__ **]`,true)
+      .addField('🏅** __Roles__**',`[** __${msg.guild.roles.size}__ **]`,true)
+      .addField('🔴**__ Members Number__**',`[** __${msg.guild.memberCount}__ **]`,true)
+      .addField('🔵**__ Members Number who online__**',`[** __${msg.guild.members.filter(m=>m.presence.status == 'online').size}__ **]`,true)
+      .addField('📝**__ Text Channels__**',`[** __${msg.guild.channels.filter(m => m.type === 'text').size}__** ]`,true)
+      .addField('🎤**__ voice Channels__**',`[** __${msg.guild.channels.filter(m => m.type === 'voice').size}__ **]`,true)
+      .addField('👑**__ The Owner__**',`**${msg.guild.owner}**`,true)
+      .addField('🆔**__ Server ID__**',`**${msg.guild.id}**`,true)
+      .addField('📅**__The date when the server created __**',msg.guild.createdAt.toLocaleString())
+      msg.channel.send({embed:embed});
+    }
+  });
+
+
+
+
+
+
+
+
+
+  
+  
+client.on('message', message => {
+    if (message.content.startsWith("+bans")) {
+        message.guild.fetchBans()
+        .then(bans => message.channel.send(`${bans.size} عدد اشخاص المبندة من السيرفر `))
+  .catch(console.error);
+}
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ client.on('message', message => {
+var prefix = "+";
+       if(message.content === prefix + "mutechat") {
+                           if(!message.channel.guild) return message.reply('** This command only for servers**');
+
+   if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply(' **__ليس لديك صلاحيات__**');
+              message.channel.overwritePermissions(message.guild.id, {
+            SEND_MESSAGES: false
+
+              }).then(() => {
+                  message.reply("**__تم تقفيل الشات__ ✅ **")
+              });
+                }
+//FIRE BOT
+    if(message.content === prefix + "unchat") {
+                        if(!message.channel.guild) return message.reply('** This command only for servers**');
+
+   if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('**__ليس لديك صلاحيات__**');
+              message.channel.overwritePermissions(message.guild.id, {
+            SEND_MESSAGES: true
+
+              }).then(() => {
+                  message.reply("**__تم فتح الشات__✅**")
+              });
+    }
+       
+});
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    client.on("message", message => {
+ if (message.content === "+games") {
+  const embed = new Discord.RichEmbed()
+      .setColor("RANDOM")
+      .setDescription(` ✧▬▬▬▬▬▬ Commands ▬▬▬▬▬▬✧
++mutechat | to mute chat
++unchat | To unmutechat
++ping | to see your ping
++avatar | to see your avatar
++id | to see your id
++mute | to mute members
+soon
+
+ 
+ ✧▬▬▬▬▬▬ Commands ▬▬▬▬▬▬✧`)
+ .setFooter("By : !  ᴰᴬᴿᴷ |  𝒜ℳℛ  | 𝒦ℐ𝒩𝒢#2151  ")
+   message.channel.sendEmbed(embed)
+   
+   }
+   });
+   
 
 
 
