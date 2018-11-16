@@ -56,15 +56,18 @@ client.on('message', msg => {//iiM0dy_EG#7040
 ╔[❖══════ஜ۩۞۩ஜ══════❖]╗
    General  ✻ Commands
 ╚[❖══════ஜ۩۞۩ஜ══════❖]╝
-❖ +avatar ➾ your avatar account // __soon__عشان تشوف صورت حسابك
-❖ +ping ➾ to see ping // عشان تشوف بنقك
-❖ +id ➾ your id // عشان تشوف ايدي حقك
-❖ +say ➾ for Repeat your words whith bot // بوت يكرر كلامك
-❖ +server ➾ to give you info about the server // معلومات عن السيرفر
-❖ +bot ➾ to give you info about the bot // معلومات عن البوت
-❖ +user ➾ to see your user // عشان تشوف اليوسر حقك
-❖ +discrim ➾ to change your tag //عشان تغير التاج حق حسابك
-❖ +ownerbot ➾ to see where owner bot // عشن تشوف مين صاحب البوت
+❖ +avatar ➾ your avatar account | عشان تشوف صورت حسابك
+❖ +ping ➾ to see ping | عشان تشوف بنقك
+❖ +id ➾ your id | عشان تشوف ايدي حقك
+❖ +say ➾ for Repeat your words whith bot | بوت يكرر كلامك
+❖ +server ➾ to give you info about the server | معلومات عن السيرفر
+❖ +bot ➾ to give you info about the bot | معلومات عن البوت
+❖ +user ➾ to see your user | عشان تشوف اليوسر حقك
+❖ +discrim ➾ to change your tag | عشان تغير التاج حق حسابك
+❖ +ownerbot ➾ to see where owner bot | عشن تشوف مين صاحب البوت
+❖ +allbots   ➾ to see all bots in the server |  عشان تشوفي عدد البوتات الفي سيرفرك
+❖ رابط      ➾ to get your link in the server | عشان تجيب الرابط حق السيرفر
+❖ +invites ➾ to see what do you get members in the server | عشان تشوف كم عضو جبت للسيرفر
 ==================================================================
 Server support : Soon!!
 ==================================================================
@@ -84,6 +87,100 @@ Server support : Soon!!
 
 
 
+
+
+ client.on("message", async message => {
+            if(!message.channel.guild) return;
+            var prefix = "+";
+        if(message.content.startsWith(prefix + 'invites')) {
+        var nul = 0
+        var guild = message.guild
+        await guild.fetchInvites()
+            .then(invites => {
+             invites.forEach(invite => {
+                if (invite.inviter === message.author) {
+                     nul+=invite.uses
+                    }
+                });
+            });
+          if (nul > 0) {
+              console.log(`\n${message.author.tag} has ${nul} invites in ${guild.name}\n`)
+              var embed = new Discord.RichEmbed()
+                  .setColor("#000000")
+                    .addField(`${message.author.username}`, `لقد قمت بدعوة **${nul}** شخص`)
+                          message.channel.send({ embed: embed });
+                      return;
+                    } else {
+                       var embed = new Discord.RichEmbed()
+                        .setColor("#000000")
+                        .addField(`${message.author.username}`, `لم تقم بدعوة أي شخص لهذة السيرفر`)
+
+                       message.channel.send({ embed: embed });
+                        return;
+                    }
+        }
+        if(message.content.startsWith(prefix + 'invite-codes')) {
+let guild = message.guild
+var codes = [""]
+message.channel.send(":postbox: **لقد قمت بأرسال جميع روابط الدعوات التي قمت بأنشائها في الخاص**")
+guild.fetchInvites()
+.then(invites => {
+invites.forEach(invite => {
+if (invite.inviter === message.author) {
+codes.push(`discord.gg/${invite.code}`)
+}
+})
+}).then(m => {
+if (codes.length < 0) {
+    var embed = new Discord.RichEmbed()
+.setColor("#000000")
+.addField(`Your invite codes in ${message.guild.name}`, `You currently don't have any active invites! Please create an invite and start inviting, then you will be able to see your codes here!`)
+message.author.send({ embed: embed });
+return;
+} else {
+    var embed = new Discord.RichEmbed()
+.setColor("#000000")
+.addField(`Your invite codes in ${message.guild.name}`, `Invite Codes:\n${codes.join("\n")}`)
+message.author.send({ embed: embed });
+return;
+}
+})
+}
+
+});
+
+
+
+
+
+
+
+client.on('message', message => {
+     if(!message.channel.guild) return;
+var prefix = "+";
+                if(message.content.startsWith(prefix + 'allbots')) {
+
+    
+    if (message.author.bot) return;
+    let i = 1;
+        const botssize = message.guild.members.filter(m=>m.user.bot).map(m=>`${i++} - <@${m.id}>`);
+          const embed = new Discord.RichEmbed()
+          .setAuthor(message.author.tag, message.author.avatarURL)
+          .setDescription(`**Found ${message.guild.members.filter(m=>m.user.bot).size} bots in this Server**
+${botssize.join('\n')}`)
+.setFooter(client.user.username, client.user.avatarURL)
+.setTimestamp();
+message.channel.send(embed)
+
+}
+
+
+});
+
+
+
+
+ 
 /// ربط
 
 client.on('message', message => {
