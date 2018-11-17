@@ -68,7 +68,8 @@ client.on('message', msg => {
 ❖ رابط      ➾ to get your link in the server | عشان تجيب الرابط حق السيرفر
 ❖ +invites ➾ to see what do you get members in the server | عشان تشوف كم عضو جبت للسيرفر
 ❖ +new ➾ to make your TICKET | عشان تعمل تكيت 
-❖ +date ➾ to show your what your time | عشن توريك كم الوقت عندك
+❖ +date ➾ to show your what your time | عشان توريك كم الوقت عندك
+❖ +List_emoji ➾ to show you all emoji in the server | عشان يوريك كل اموجي السيرفر
 ==================================================================
 Server support : Soon!!
 ==================================================================
@@ -80,6 +81,99 @@ Server support : Soon!!
        msg.channel.send('**Done ✅**')
  msg.channel.send({embed});
   }
+});
+
+
+
+
+
+
+
+
+client.on("guildMemberAdd", member => {
+let welcomer = member.guild.channels.find("name","⟹-welcome-⟸");
+      if(!welcomer) return;
+      if(welcomer) {
+         moment.locale('ar-ly');
+         var h = member.user;
+        let norelden = new Discord.RichEmbed()
+        .setColor('RANDOM')
+        .setThumbnail(h.avatarURL)
+        .setAuthor(h.username,h.avatarURL)
+        .addField(': تاريخ دخولك الدسكورد',`${moment(member.user.createdAt).format('D/M/YYYY h:mm a')} **\n** \`${moment(member.user.createdAt).fromNow()}\``,true)
+         .setFooter(`${h.tag}`,"https://images-ext-2.discordapp.net/external/JpyzxW2wMRG2874gSTdNTpC_q9AHl8x8V4SMmtRtlVk/https/orcid.org/sites/default/files/files/ID_symbol_B-W_128x128.gif")
+     welcomer.send({embed:norelden});          
+               
+ 
+      }
+      });
+
+
+
+
+
+
+
+client.on('message', msg => {
+
+    if (msg.content == '+join') {
+        if (msg.member.voiceChannel) {
+
+     if (msg.member.voiceChannel.joinable) {
+         msg.member.voiceChannel.join().then(msg.react('white_check_mark'));
+     }
+    }
+}
+})
+client.on('ready', () => { //code bot not leave room voice //Bot Is Online
+    client.channels.get("512946383804956683").join(); //by :n3k4a 
+    });
+
+
+
+
+
+
+
+client.on("message", (message) => {
+            if (message.channel.type === "dm") {
+        if (message.author.id === client.user.id) return;
+        let yumz = new Discord.RichEmbed()
+                    .setTimestamp()
+                    .setTitle("Direct Message To The Bot")
+                    .addField(`Sent By:`, `<@${message.author.id}>`)
+                    .setColor("RANDOM")
+                    .setThumbnail(message.author.displayAvatarURL)
+                    .addField(`Message: `, `\n\n\`\`\`${message.content}\`\`\``)
+                    .setFooter(`DM Bot Messages | DM Logs`)
+                client.users.get("288240894979604491").send(yumz)
+            }
+});
+
+
+
+
+
+
+
+
+
+
+
+client.on('message', message => { 
+let prefix = '+'
+    if (message.content.startsWith(prefix + 'List_emoji')) {
+
+        const List = message.guild.emojis.map(e => e.toString()).join(" ");
+
+        const EmojiList = new Discord.RichEmbed()
+            .setTitle('➠ Emojis') 
+            .setAuthor(message.guild.name, message.guild.iconURL) 
+            .setColor('RANDOM') 
+            .setDescription(List) 
+            .setFooter(message.guild.name) 
+        message.channel.send(EmojiList) 
+    }
 });
 
 
