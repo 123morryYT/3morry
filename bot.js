@@ -1075,8 +1075,8 @@ var args = message.content.split(" ").slice(1);
     }, ms(mutetime));
   
   
-  //alpha codes
-  } //alpha codes
+
+  } 
 });
 client.on('message', async message =>{
   var prefix = "+"; //alpha codes
@@ -1103,15 +1103,10 @@ if(command === `unmute`) {
   message.channel.sendMessage("**لقد تم فك الميوت عن شخص بنجاح**:white_check_mark:");
 
   return;
- //alpha codes
+
   }
-
-}); //alpha codes
- //alpha codes
-
-
-
-
+    });
+  });
 
 
 
