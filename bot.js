@@ -45,12 +45,13 @@ client.on('message', msg => {
 ╔[❖══════ஜ۩۞۩ஜ══════❖]╗
     Admin   ✻  Commands
 ╚[❖══════ஜ۩۞۩ஜ══════❖]╝
- ❖ +kick <mention > ➾ kick member from server
- ❖ $+ban  <mention > ➾ ban member from server
- ❖ +mute < mention > ➾ mute member
+ ❖  +kick <mention > ➾ kick member from server
+ ❖  +ban  <mention > ➾ ban member from server
+ ❖  +mute < mention > ➾ mute member
  ❖  +unmute <mention> ➾ unmute member
  ❖  +bc <message> ➾ message all members in server
  ❖  +clear ➾ Clears the chat
+ ❖  +setvoice ➾ to show Members in the rooms
 ╔[❖══════ஜ۩۞۩ஜ══════❖]╗
    General  ✻ Commands
 ╚[❖══════ஜ۩۞۩ஜ══════❖]╝
@@ -66,7 +67,8 @@ client.on('message', msg => {
 ❖ +allbots   ➾ to see all bots in the server |  عشان تشوفي عدد البوتات الفي سيرفرك
 ❖ رابط      ➾ to get your link in the server | عشان تجيب الرابط حق السيرفر
 ❖ +invites ➾ to see what do you get members in the server | عشان تشوف كم عضو جبت للسيرفر
-❖ +new ➾ to make your TICKET | عشن تعمل تكيت 
+❖ +new ➾ to make your TICKET | عشان تعمل تكيت 
+❖ +date ➾ to show your what your time | عشن توريك كم الوقت عندك
 ==================================================================
 Server support : Soon!!
 ==================================================================
@@ -79,6 +81,108 @@ Server support : Soon!!
  msg.channel.send({embed});
   }
 });
+
+
+
+
+
+
+
+
+
+
+  client.on('message', emoko => {
+  if (emoko.content === "+date") {
+         if (!emoko.channel.guild) return emoko.reply('** This command only for servers **');  
+         var currentTime = new Date(),
+            hours = currentTime.getHours() + 4 ,
+            hours2 = currentTime.getHours() + 3 ,
+            hours3 = currentTime.getHours() + 2 ,
+            hours4 = currentTime.getHours() + 3 ,
+            minutes = currentTime.getMinutes(),
+            seconds = currentTime.getSeconds(),
+            Year = currentTime.getFullYear(),
+            Month = currentTime.getMonth() + 1,
+            Day = currentTime.getDate();
+             var h = hours
+  if(hours > 12) {
+               hours -= 12;
+            } else if(hours == 0) {
+                hours = "12";
+            }  
+             if(hours2 > 12) {
+               hours2 -= 12;
+            } else if(hours2 == 0) {
+                hours2 = "12";
+            
+            }  
+if(hours3 > 12) {
+               hours3 -= 12;
+            } else if(hours3 == 0) {
+                hours3 = "12";
+            } 
+            if (minutes < 10) {
+                minutes = '0' + minutes;
+            }
+
+
+            var suffix = 'صباحاَ';
+            if (hours >= 12) {
+                suffix = 'مساء';
+                hours = hours - 12;
+            }
+            if (hours == 0) {
+                hours = 12;
+            }
+ 
+
+const embed = new Discord.RichEmbed()
+                .setThumbnail("https://i.imgur.com/ib3n4Hq.png") 
+                .setTitle( "『التاريخ  والوقت』")
+                .setColor('RANDOM')
+                .setFooter(emoko.author.username, emoko.author.avatarURL)
+                .addField('الامارات',
+                "『"+ hours + ":" + minutes +":"+ seconds + "』")
+                 .addField('مكه المكرمه',
+                "『"+ hours2 + ":" + minutes +":"+ seconds  + "』") 
+                .addField('مصر',
+                "『"+ hours3 + ":" + minutes +":"+ seconds  + "』") 
+                
+                .addField('Date',
+                "『"+ Day + "-" + Month + "-" + Year +  "』")
+
+
+  emoko.channel.sendEmbed(embed);
+   }
+});
+
+
+
+
+
+
+
+
+
+
+client.on('message',async message => {
+  if(message.content.startsWith(prefix + "setvoice")) {
+  if(!message.guild.member(message.author).hasPermissions('MANAGE_CHANNELS')) return message.reply('❌ **ليس لديك الصلاحيات الكافية**');
+  if(!message.guild.member(client.user).hasPermissions(['MANAGE_CHANNELS','MANAGE_ROLES_OR_PERMISSIONS'])) return message.reply('❌ **ليس معي الصلاحيات الكافية**');
+  message.channel.send('✅| **تم عمل الروم بنجاح**');
+  message.guild.createChannel(`Voice Online : [ ${message.guild.members.filter(m => m.voiceChannel).size} ]` , 'voice').then(c => {
+    console.log(`Voice online channel setup for guild: \n ${message.guild.name}`);
+    c.overwritePermissions(message.guild.id, {
+      CONNECT: false,
+      SPEAK: false
+    });
+    setInterval(() => {
+      c.setName(`Voice Online : [ ${message.guild.members.filter(m => m.voiceChannel).size} ]`)
+    },1000);
+  });
+  }
+});
+
 
 
 
