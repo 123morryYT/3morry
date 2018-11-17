@@ -89,6 +89,34 @@ Server support : Soon!!
 
 
 
+
+
+
+
+
+
+client.on("ready", async  => {
+setInterval(function(){
+client.channels.find('id', '512944803084894209').setName("⟹");
+client.channels.find('id', '512944803084894209').setName("⟹-");
+client.channels.find('id', '512944803084894209').setName("⟹-w");
+client.channels.find('id', '512944803084894209').setName("⟹-we");
+client.channels.find('id', '512944803084894209').setName("⟹-wel");
+client.channels.find('id', '512944803084894209').setName("⟹-welcom");
+client.channels.find('id', '512944803084894209').setName("⟹-welcome");
+client.channels.find('id', '512944803084894209').setName("⟹-welcome-");
+client.channels.find('id', '512944803084894209').setName("⟹-welcome-⟸");
+  }, 3000);
+});
+
+
+
+
+
+
+
+
+
 client.on("guildMemberAdd", member => {
 let welcomer = member.guild.channels.find("name","⟹-welcome-⟸");
       if(!welcomer) return;
