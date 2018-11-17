@@ -89,7 +89,6 @@ Server support : Soon!!
 
 
 
-
 client.on("guildMemberAdd", member => {
 let welcomer = member.guild.channels.find("name","⟹-welcome-⟸");
       if(!welcomer) return;
@@ -112,24 +111,10 @@ let welcomer = member.guild.channels.find("name","⟹-welcome-⟸");
 
 
 
-
-
-client.on('message', msg => {
-
-    if (msg.content == '+join') {
-        if (msg.member.voiceChannel) {
-
-     if (msg.member.voiceChannel.joinable) {
-         msg.member.voiceChannel.join().then(msg.react('white_check_mark'));
-     }
-    }
-}
-})
-client.on('ready', () => { //code bot not leave room voice //Bot Is Online
-    client.channels.get("512946383804956683").join(); //by :n3k4a 
-    });
-
-
+client.on('ready', () => {
+var x = client.channels.get("512946383804956683");
+if (x) x.join();
+});
 
 
 
