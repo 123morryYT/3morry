@@ -1105,7 +1105,6 @@ if(command === `unmute`) {
   return;
 
   }
-    });
 
 
 
