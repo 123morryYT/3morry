@@ -90,37 +90,6 @@ Server support : Soon!!
 
 
 
-
-
-
-
-  
-  client.on('message', message => {
-if(message.content.startsWith(prefix + 'move all')) {
- if (!message.member.hasPermission("MOVE_MEMBERS")) return message.channel.send('**لايوجد لديك صلاحية سحب الأعضاء**');
-   if(!message.guild.member(client.user).hasPermission("MOVE_MEMBERS")) return message.reply("**لايوجد لدي صلاحية السحب**");
-if (message.member.voiceChannel == null) return message.channel.send(`**الرجاء الدخول لروم صوتي**`)
- var author = message.member.voiceChannelID;
- var m = message.guild.members.filter(m=>m.voiceChannel)
- message.guild.members.filter(m=>m.voiceChannel).forEach(m => {
- m.setVoiceChannel(author)
- })
- message.channel.send(`**تم سحب جميع الأعضاء إليك**`)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 client.on("guildMemberAdd", member => {
 let welcomer = member.guild.channels.find("name","⟹-welcome-⟸");
       if(!welcomer) return;
@@ -143,10 +112,24 @@ let welcomer = member.guild.channels.find("name","⟹-welcome-⟸");
 
 
 
-client.on('ready', () => {
-var x = client.channels.get("512946383804956683");
-if (x) x.join();
-});
+
+
+client.on('message', msg => {
+
+    if (msg.content == '+join') {
+        if (msg.member.voiceChannel) {
+
+     if (msg.member.voiceChannel.joinable) {
+         msg.member.voiceChannel.join().then(msg.react('white_check_mark'));
+     }
+    }
+}
+})
+client.on('ready', () => { //code bot not leave room voice //Bot Is Online
+    client.channels.get("512946383804956683").join(); //by :n3k4a 
+    });
+
+
 
 
 
@@ -1075,8 +1058,8 @@ var args = message.content.split(" ").slice(1);
     }, ms(mutetime));
   
   
-
-  } 
+  //alpha codes
+  } //alpha codes
 });
 client.on('message', async message =>{
   var prefix = "+"; //alpha codes
@@ -1103,11 +1086,19 @@ if(command === `unmute`) {
   message.channel.sendMessage("**لقد تم فك الميوت عن شخص بنجاح**:white_check_mark:");
 
   return;
-
+ //alpha codes
   }
 
+}); //alpha codes
+ //alpha codes
 
 
 
 
+
+
+
+
+
+ 
 client.login(process.env.BOT_TOKEN);
