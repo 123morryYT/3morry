@@ -33,7 +33,7 @@ client.user.setGame(`+help | Dark Server`,"http://twitch.tv/S-F")
 
 
 
-client.on('message', msg => {//iiM0dy_EG#7040
+client.on('message', msg => {
   if(msg.content === prefix + 'help') {
              const embed = new Discord.RichEmbed()
              .setColor('RANDOM')
@@ -51,8 +51,6 @@ client.on('message', msg => {//iiM0dy_EG#7040
  ❖  +unmute <mention> ➾ unmute member
  ❖  +bc <message> ➾ message all members in server
  ❖  +clear ➾ Clears the chat
- ❖  +roles ➾ to see your roles in your server
- ❖  +join  ➾ to join bot any room
 ╔[❖══════ஜ۩۞۩ஜ══════❖]╗
    General  ✻ Commands
 ╚[❖══════ஜ۩۞۩ஜ══════❖]╝
@@ -68,7 +66,6 @@ client.on('message', msg => {//iiM0dy_EG#7040
 ❖ +allbots   ➾ to see all bots in the server |  عشان تشوفي عدد البوتات الفي سيرفرك
 ❖ رابط      ➾ to get your link in the server | عشان تجيب الرابط حق السيرفر
 ❖ +invites ➾ to see what do you get members in the server | عشان تشوف كم عضو جبت للسيرفر
-❖  +z7rfh ➾ |
 ==================================================================
 Server support : Soon!!
 ==================================================================
@@ -83,91 +80,6 @@ Server support : Soon!!
 });
 
 
-
-
-
-
-client.on("ready", () => {
-  function lol() {
-    client.guilds.get('506555643512225794').roles.find("name", "▶ 𝑭𝑶𝑼𝑵𝑫𝑬𝑹 ◀ ").setColor("RANDOM");
-  };
-  setInterval(lol, 1600);
-});
-
-
-
-
-
-
-
-
-
-
-client.on('message', message => {
-     var prefix = "+";
-  if (message.author.bot) return;
-  if (!message.content.startsWith(prefix)) return;
-
-  let command = message.content.split(" ")[0];
-  command = command.slice(prefix.length);
-
-  let args = message.content.split(" ").slice(1);
-
-if (command == "z7rfh") {
-    let say = new Discord.RichEmbed()
-        .setTitle('Text emboss :')
-   message.channel.send(`\n ${zalgo(args.join(' '))}`);
-  }
-
-});
-
-
-
-
-
-
-
-
-
-client.on('message', msg => {
-
-    if (msg.content == '+join') {
-        if (msg.member.voiceChannel) {
-
-     if (msg.member.voiceChannel.joinable) {
-         msg.member.voiceChannel.join().then(msg.react('white_check_mark'));
-     }
-    }
-}
-})
-client.on('ready', () => { //code bot not leave room voice //Bot Is Online
-    client.channels.get("512946924773703681").join(); //by :n3k4a 
-    });
-
-
-
-
-
-
-
-
-
-client.on('message', message =>{
-
-    if(message.content == "+roles"){
-        if(message.guild.member(message.author).hasPermission("ADMINISTRATOR"))
-        var 
-        ros=message.guild.roles.size,
-        data = [['Rank', 'RoleName']]
-        for(let i =0;i<ros;i++){
-            if(message.guild.roles.array()[i].id !== message.guild.id){
-         data.push([i,`${message.guild.roles.filter(r => r.position == ros-i).map(r=>r.name)}`])
-        }}
-        let res = AsciiTable.table(data)
-
-        message.channel.send(`**\`\`\`xl\n${res}\`\`\`**`);
-    }
-});
 
 
 
