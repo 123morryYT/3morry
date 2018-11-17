@@ -74,8 +74,8 @@ Server support : Soon!!
 ==================================================================
  
 **`);
-       msg.channel.send('**تم ارسال اوامر البوت في الخاص**')
- msg.author.send({embed});
+       msg.channel.send('**Done ✅**')
+ msg.channel.send({embed});
   }
 });
 
