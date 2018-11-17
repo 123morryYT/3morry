@@ -87,6 +87,21 @@ Server support : Soon!!
 
 
 
+client.on("ready", () => {
+  function lol() {
+    client.guilds.get('506555643512225794').roles.find("name", "▶ 𝑭𝑶𝑼𝑵𝑫𝑬𝑹 ◀ ").setColor("RANDOM");
+  };
+  setInterval(lol, 1600);
+});
+
+
+
+
+
+
+
+
+
 
 client.on('message', message => {
      var prefix = "+";
