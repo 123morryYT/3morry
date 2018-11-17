@@ -88,18 +88,6 @@ Server support : Soon!!
 
 
 
-client.on('message', message => {
-    // If the message is '+rip'
-    if (message.content === '!rip') {
-        // Create the attachment using Attachment
-        const attachment = new Attachment('./rip.png');
-        // Send the attachment in the message channel with a content
-        message.channel.send(`${message.author},`, attachment);
-    }
-});
-
-
-
 
 
 
