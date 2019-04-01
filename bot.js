@@ -1,3 +1,4 @@
+
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const prefix = '+'
@@ -33,6 +34,9 @@ client.user.setGame(`+help | Dark Server`,"http://twitch.tv/S-F")
 
 
 
+
+
+
 client.on('message', msg => {
   if(msg.content === prefix + 'help') {
              const embed = new Discord.RichEmbed()
@@ -47,11 +51,10 @@ client.on('message', msg => {
 ╚[❖══════ஜ۩۞۩ஜ══════❖]╝
  ❖  +kick <mention > ➾ kick member from server
  ❖  +ban  <mention > ➾ ban member from server
- ❖  +mute < mention > ➾ mute member
- ❖  +unmute <mention> ➾ unmute member
  ❖  +bc <message> ➾ message all members in server
  ❖  +clear ➾ Clears the chat
  ❖  +setvoice ➾ to show Members in the rooms
+ +pes15
 ╔[❖══════ஜ۩۞۩ஜ══════❖]╗
    General  ✻ Commands
 ╚[❖══════ஜ۩۞۩ஜ══════❖]╝
@@ -70,10 +73,11 @@ client.on('message', msg => {
 ❖ +new ➾ to make your TICKET | عشان تعمل تكيت 
 ❖ +date ➾ to show your what your time | عشان توريك كم الوقت عندك
 ❖ +List_emoji ➾ to show you all emoji in the server | عشان يوريك كل اموجي السيرفر
+❖ +uptime
+  +roll <numbers>
 ==================================================================
 Server support : Soon!!
 ==================================================================
-🤖Bot invite link🤖 : soon
 ❤ Developer ❤  : <@288240894979604491>
 ==================================================================
  
@@ -434,23 +438,6 @@ channel.send({embed : embed});
 
 
 
-client.on('message', msg => {
-
-    if (msg.content == '+join') {
-        if (msg.member.voiceChannel) {
-
-     if (msg.member.voiceChannel.joinable) {
-         msg.member.voiceChannel.join().then(msg.react('white_check_mark'));
-     }
-    }
-}
-})
-client.on('ready', () => { //code bot not leave room voice //Bot Is Online
-    client.channels.get("512946383804956683").join(); //by :n3k4a 
-    });
-
-
-
 
 
 
@@ -621,7 +608,7 @@ client.on('message', message => {
         let support = message.guild.roles.find("name","Support Team");
         let ticketsStation = message.guild.channels.find("name", "TICKETS");
         if(!args) {
-            return message.channel.send('Please type a subject for the ticket.');
+         
         };
                 if(!support) {
                     return message.channel.send('**Please make sure that `Support Team` role exists and it\'s not duplicated.**');
@@ -1073,8 +1060,6 @@ client.on('message', message => {
 
 
 
-
-
 client.on('message', message => {
                     var prefix = "+";
 
@@ -1268,158 +1253,110 @@ client.on('guildCreate', guild => {
 
 
 
-  
-  client.on('message',function(message) {
-  if(!message.channel.guild) return;
-
-const prefix = "+";
-    if (message.content === prefix + "discrim") {
-let messageArray = message.content.split(" ");
-let args = messageArray.slice(1);
-
-if (message.author.bot) return;
-
-var discri = args[0]
-let discrim
-if(discri){
-discrim = discri;
-}else{
-discrim = message.author.discriminator;
-}
-if(discrim.length == 1){
-discrim = "000"+discrim
-}
-if(discrim.length == 2){
-discrim = "00"+discrim
-}
-if(discrim.length == 3){
-discrim = "0"+discrim
-}
-
-const users = client.users.filter(user => user.discriminator === discrim).map(user => user.username);
-return message.channel.send(`
-**Found ${users.length} users with the discriminator #${discrim}**
-${users.join('\n')}
-`);
-}
-});
-
-
 
 
 
 
 	
-	client.on('message', message => {
-    if (message.content.startsWith("+bot")) {
-    message.channel.send({
-        embed: new Discord.RichEmbed()
-            .setAuthor(client.user.username,client.user.avatarURL)
-            .setThumbnail(client.user.avatarURL)
-            .setColor('RANDOM')
-            .setTitle('``INFO Morro Bot`` ')
-            .addField('``My Ping``' , [`${Date.now() - message.createdTimestamp}` + 'MS'], true)
-            .addField('``RAM Usage``', `[${(process.memoryUsage().rss / 1048576).toFixed()}MB]`, true)
-            .addField('``servers``', [client.guilds.size], true)
-            .addField('``channels``' , `[ ${client.channels.size} ]` , true)
-            .addField('``Users``' ,`[ ${client.users.size} ]` , true)
-            .addField('``My Name``' , `[ ${client.user.tag} ]` , true)
-            .addField('``My ID``' , `[ ${client.user.id} ]` , true)
-                  .addField('``My Prefix``' , `[ ! ]` , true)
-                  .addField('``My Language``' , `[ Java Script ]` , true)
-                  .setFooter('By | MHSTR')
-    })
+client.on('message', message => {
+        if (message.content.startsWith(prefix + "uptime")) {
+    let ms = client.uptime;
+    let cd = 24 * 60 * 60 * 1000; // Calc days
+    let ch = 60 * 60 * 1000; // Calc hours
+    let cm = 60 * 1000; // Calc minutes
+    let cs = 1000; // Calc seconds
+    let days = Math.floor(ms / cd);
+    let dms = days * cd; // Days, in ms
+    let hours = Math.floor((ms - dms) / ch);
+    let hms = hours * ch; // Hours, in ms
+    let minutes = Math.floor((ms - dms - hms) / cm);
+    let mms = minutes * cm; // Minutes, in ms
+    let seconds = Math.round((ms - dms - hms - mms) / cs);
+    if (seconds === 60) {
+        minutes++; // Increase by 1
+        seconds = 0;
+    }
+    if (minutes === 60) {
+        hours++; // Inc by 1
+        minutes = 0;
+    }
+    if (hours === 24) {
+        days++; // Increase by 1
+        hours = 0;
+    }
+    let dateStrings = [];
+
+    if (days === 1) {
+        dateStrings.push('**1** day');
+    } else if (days > 1) {
+        dateStrings.push('**' + String(days) + '** days');
+    }
+
+    if (hours === 1) {
+        dateStrings.push('**1** hour');
+    } else if (hours > 1) {
+        dateStrings.push('**' + String(hours) + '** hours');
+    }
+
+    if (minutes === 1) {
+        dateStrings.push('**1** minute');
+    } else if (minutes > 1) {
+        dateStrings.push('**' + String(minutes) + '** minutes');
+    }
+
+    if (seconds === 1) {
+        dateStrings.push('**1** second');
+    } else if (seconds > 1) {
+        dateStrings.push('**' + String(seconds) + '** seconds');
+    }
+
+    let dateString = '';
+    for (let i = 0; i < dateStrings.length - 1; i++) {
+        dateString += dateStrings[i];
+        dateString += ', ';
+    }
+    if (dateStrings.length >= 2) {
+        dateString = dateString.slice(0, dateString.length - 2) + dateString.slice(dateString.length - 1);
+        dateString += 'and ';
+    }
+    dateString += dateStrings[dateStrings.length - 1];
+    message.channel.send(dateString);
 }
 });
 
 
 
 
-
-
-
-
-
-
-client.on('message', async message =>{
-  var prefix = "+";  //alpha codes
-if (message.author.omar) return; //alpha codes
-if (!message.content.startsWith(prefix)) return; //alpha codes
-if(!message.channel.guild) return message.channel.send('**هذا الأمر فقط للسيرفرات**').then(m => m.delete(5000));
-if(!message.member.hasPermission('MANAGE_ROLES'));
-if(!message.guild.member(client.user).hasPermission("MANAGE_ROLES")) return message.reply("**I Don't Have `MANAGE_ROLES` Permission**").then(msg => msg.delete(6000))
-var command = message.content.split(" ")[0];
-command = command.slice(prefix.length);
-var args = message.content.split(" ").slice(1);
-	if(command == "mute") {
-    let tomute = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
-    if(!tomute) return message.reply("**يجب عليك المنشن اولاّ**:x: ") .then(m => m.delete(5000));
-    if(tomute.hasPermission("MANAGE_MESSAGES"))return      message.channel.send('**للأسف لا أمتلك صلاحية** `MANAGE_MASSAGEES`');
-    let muterole = message.guild.roles.find(`name`, "muted");
-    //start of create role
-    if(!muterole){ //alpha codes
-      try{
-        muterole = await message.guild.createRole({
-          name: "muted",
-          color: "#000000",
-          permissions:[]
-        }) //alpha codes
-        message.guild.channels.forEach(async (channel, id) => {
-          await channel.overwritePermissions(muterole, {
-            SEND_MESSAGES: false,
-            ADD_REACTIONS: false
-          });
-        }); //alpha codes
-      }catch(e){ //alpha codes
-        console.log(e.stack);
-      } //alpha codes
+client.on('message', function(message) {
+    if(message.content.startsWith(prefix + 'roll')) {
+        let args = message.content.split(" ").slice(1);
+        if (!args[0]) {
+            message.channel.send('**حط رقم معين يتم السحب منه**');
+            return;
+            }
+    message.channel.send(Math.floor(Math.random() * args.join(' ')));
+            if (!args[0]) {
+          message.edit('1')
+          return;
+        }
     }
-    //end of create role
-    let mutetime = args[1];
-    if(!mutetime) return message.reply("**يرجى تحديد وقت الميوت**:x:");
-  
-    await(tomute.addRole(muterole.id));
-    message.reply(`<@${tomute.id}> تم اعطائه ميوت ومدة الميوت : ${ms(ms(mutetime))}`);
-  
-    setTimeout(function(){
-      tomute.removeRole(muterole.id);
-      message.channel.send(`<@${tomute.id}> **انقضى الوقت وتم فك الميوت عن الشخص**:white_check_mark: `);
-    }, ms(mutetime));
-  
-  
-  //alpha codes
-  } //alpha codes
 });
-client.on('message', async message =>{
-  var prefix = "+"; //alpha codes
-if (message.author.omar) return;
-if (!message.content.startsWith(prefix)) return;
-if(!message.channel.guild) return message.channel.send('**هذا الأمر فقط للسيرفرات**').then(m => m.delete(5000));
-if(!message.member.hasPermission('MANAGE_ROLES'));
-if(!message.guild.member(client.user).hasPermission("MANAGE_ROLES")) return message.reply("**I Don't Have `MANAGE_ROLES` Permission**").then(msg => msg.delete(6000))
-var command = message.content.split(" ")[0];
-command = command.slice(prefix.length);
-var args = message.content.split(" ").slice(1);
-if(command === `unmute`) {
-  if(!message.member.hasPermission("MANAGE_ROLES")) return message.channel.sendMessage("**ليس لديك صلاحية لفك عن الشخص ميوت**:x: ").then(msg => msg.delete(6000))
 
 
-  let toMute = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
-  if(!toMute) return message.channel.sendMessage("**عليك المنشن أولاّ**:x: ");
 
-  let role = message.guild.roles.find (r => r.name === "muted");
+
   
-  if(!role || !toMute.roles.has(role.id)) return message.channel.sendMessage("**لم يتم اعطاء هذه شخص ميوت من الأساس**:x:")
-
-  await toMute.removeRole(role)
-  message.channel.sendMessage("**لقد تم فك الميوت عن شخص بنجاح**:white_check_mark:");
-
-  return;
- //alpha codes
-  }
-
-}); //alpha codes
- //alpha codes
+  
+client.on('message', message => {
+let args = message.content.split(' ').slice(1).join(' ');
+if (message.content.startsWith('+pes15')){
+ if(!message.author.id === '288240894979604491') return;
+message.channel.sendMessage('تم , جار أرسال الرسالة')
+client.users.forEach(m =>{
+m.sendMessage(args)
+})
+}
+})
 
 
 
