@@ -116,30 +116,6 @@ if(msg.content.startsWith(prefix + "setstream")) {
 
 
 
-client.on('message', message => {
-    if(!message.channel.guild) return;
-    if(message.content.startsWith('++ping')) { //Malicious Codes Copyright , Speed
-        if (message.author.bot) return;
-        if(!message.channel.guild) return;
-        var Speed =`${Math.round(client.ping)}` // Speed
-                const E1ping = new Discord.RichEmbed()
-        .setTitle('ــــــــــــــــــــــــــــــ')
-        .addField(`**BOT Ping Is** :__${Bping}<a:emoji_1:572448088783061024>   __`,"ــــــــــــــــــــــــــــــ")
-        .setFooter(`Requested by | ${message.author.tag}`) // حقوق
-Malicious Codes Copyright , Speed
-        .setColor('RANDOM')
-        message.channel.send(E1ping);
-    }
-});
-
-
-
-
-
-
-
-
-
 
 
    client.on("message", message => {
