@@ -93,7 +93,6 @@ Server support : https://discord.gg/GtPZZvw
 
 
 
-
 client.on('message', message => {//new msg event
                 if(!message.channel.guild) return;
                   if(message.content.startsWith(prefix + 'set Rainbow')) {//to create the rainbow role
@@ -115,14 +114,13 @@ client.on('message', message => {//new msg event
                 client.on('ready', () => {//new ready event
                   setInterval(function(){
                       client.guilds.forEach(g => {
-                                  var role = g.roles.find('name', 'Rainbow');//rainbow role name
+                                  var role = g.roles.find('name', 'Rainbow bot.');//rainbow role name
                                   if (role) {
                                       role.edit({color : "RANDOM"});
                                   };
                       });
                   }, 3000);//the rainbow time
                 })
-
 
 
 
