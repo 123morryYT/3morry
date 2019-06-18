@@ -6,7 +6,7 @@ const prefix = '+'
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
-client.user.setGame(`+help | Dark Server`,"http://twitch.tv/S-F")
+client.user.setGame(`+help | New Update`,"http://twitch.tv/S-F")
   console.log('')
   console.log('')
   console.log('╔[═════════════════════════════════════════════════════════════════]╗')
@@ -73,9 +73,9 @@ client.on('message', msg => {
 ❖ +new ➾ to make your TICKET | عشان تعمل تكيت 
 ❖ +date ➾ to show your what your time | عشان توريك كم الوقت عندك
 ❖ +List_emoji ➾ to show you all emoji in the server | عشان يوريك كل اموجي السيرفر
-❖ +uptime
-++ping
-  +roll <numbers>
+❖ +uptime | new codes
+❖ ++ping | new codes
+❖ +roll <numbers> | new codes
 ==================================================================
 Server support : Soon!!
 ==================================================================
