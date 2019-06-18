@@ -54,15 +54,15 @@ client.on('message', msg => {
  ❖  +bc <message> ➾ message all members in server
  ❖  +clear ➾ Clears the chat
  ❖  +setvoice ➾ to show Members in the rooms
- +pes15
+ ❖ +pes15
+ ❖ +say ➾ for Repeat your words whith bot | بوت يكرر كلامك
+ ❖ +server ➾ to give you info about the server | معلومات عن السيرفر
 ╔[❖══════ஜ۩۞۩ஜ══════❖]╗
    General  ✻ Commands
 ╚[❖══════ஜ۩۞۩ஜ══════❖]╝
 ❖ +avatar ➾ your avatar account | عشان تشوف صورت حسابك
 ❖ +ping ➾ to see ping | عشان تشوف بنقك
 ❖ +id ➾ your id | عشان تشوف ايدي حقك
-❖ +say ➾ for Repeat your words whith bot | بوت يكرر كلامك
-❖ +server ➾ to give you info about the server | معلومات عن السيرفر
 ❖ +bot ➾ to give you info about the bot | معلومات عن البوت
 ❖ +user ➾ to see your user | عشان تشوف اليوسر حقك
 ❖ +discrim ➾ to change your tag | عشان تغير التاج حق حسابك
@@ -77,7 +77,7 @@ client.on('message', msg => {
 ❖ ++ping | new codes
 ❖ +roll <numbers> | new codes
 ==================================================================
-Server support : Soon!!
+Server support : https://discord.gg/GtPZZvw
 ==================================================================
 ❤ Developer ❤  : <@288240894979604491>
 ==================================================================
