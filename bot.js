@@ -89,7 +89,11 @@ Server support : https://discord.gg/GtPZZvw
 });
 
 
-
+client.on('message',message => {
+  if(message.content.startsWith('+joinme'))
+message.member.voiceChannel.join()
+message.reply('Done')
+});
 
 
 
