@@ -118,7 +118,7 @@ client.on('message', message => {//new msg event
                                       role.edit({color : "RANDOM"});
                                   };
                       });
-                  }, 1000);//the rainbow time
+                  }, 3000);//the rainbow time
                 })
 
 
