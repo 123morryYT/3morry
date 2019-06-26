@@ -318,7 +318,7 @@ const embed = new Discord.RichEmbed()
                 .addField('مصر',
                 "『"+ hours3 + ":" + minutes +":"+ seconds  + "』") 
                 .addField('العراق',
-                "『"+ hours + ":" + minutes +":"+ seconds + "』")
+                "『"+ hours2 + ":" + minutes +":"+ seconds  + "』")
                 
                 .addField('Date',
                 "『"+ Day + "-" + Month + "-" + Year +  "』")
