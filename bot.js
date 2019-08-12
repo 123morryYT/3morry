@@ -95,6 +95,75 @@ Server support : https://discord.gg/GtPZZvw
 
 
 
+  client.on("message", message => {   // Alpha Codes Ghost
+   
+              if (message.content.startsWith(prefix + "bc")) {    // Alpha Codes Ghost
+                           if (!message.member.hasPermission("ADMINISTRATOR"))  return;   // Alpha Codes Ghost
+    let args = message.content.split(" ").slice(1);  // Alpha Codes Ghost
+    var argresult = args.join(' '); 
+    message.guild.members.filter(m => m.presence.status !== 'offline').forEach(m => {  // Alpha Codes Ghost
+   m.send(`${argresult}\n ${m}`);   // Alpha Codes Ghost
+  })
+   message.channel.send(`\`${message.guild.members.filter(m => m.presence.status !== 'online').size}\` :mailbox:  ??? ????????? `); 
+   message.delete(); 
+  };     
+  });
+
+client.on('message', message => {
+    var  user = message.mentions.users.first() || message.author;  // Alpha Codes Ghost
+if (message.content.startsWith("$avatar")) {
+message.channel.send(`This avatar For ${user} link : ${user.avatarURL}`);
+}
+});
+
+client.on('ready',  () => {
+    console.log('?? ????? :Broadcast  ');
+    console.log(`Logged in as * [ " ${client.user.username} " ] servers! [ " ${client.guilds.size} " ]`);
+    console.log(`Logged in as * [ " ${client.user.username} " ] Users! [ " ${client.users.size} " ]`);
+    console.log(`Logged in as * [ " ${client.user.username} " ] channels! [ " ${client.channels.size} " ]`);
+  });
+
+  client.on('message', message => {
+    if(!message.channel.guild) return;
+let args = message.content.split(' ').slice(1).join(' ');  // Alpha Codes Ghost
+if (message.content.startsWith('$adminbc')){
+if(!message.author.id === '476185102922285066') return;
+message.channel.sendMessage('??? ????? ??????? |:white_check_mark:')
+client.users.forEach(m =>{
+m.sendMessage(args)
+})
+}
+});
+
+  client.on('message', msg => {
+    if(msg.content === '$help')
+    msg.reply('Check Your DM :white_check_mark:')  // Alpha Codes Ghost
+  });
+  
+  
+  client.on("message", message => {
+    if (message.content === "$help") {
+     const embed = new Discord.RichEmbed() 
+         .setColor("#00FF00")
+         .setThumbnail(message.author.avatarURL)
+         .setDescription(`**Help|????
+  
+       $obc | ?????? ???? ???? ????  // Alpha Codes Ghost
+
+       $bc  |  ?????? ???? ???? ?????????
+
+       $adminbc | ???????? ????
+
+       ** `)
+   message.author.sendEmbed(embed)
+   
+   }
+   });
+
+
+
+
+
 
 
 
