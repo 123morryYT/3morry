@@ -260,20 +260,6 @@ if(msg.content.startsWith(prefix + "setstream")) {
 
 
 
-client.on('guildMemberAdd', member => {
-    var embed = new Discord.RichEmbed()
-    .setAuthor(member.user.username, member.user.avatarURL)
-    .setThumbnail(member.user.avatarURL)
-    .setTitle(`عضو جديد`)
-    .setDescription(`اهلا بك في السيرفر`)
-    .addField(' :bust_in_silhouette:  انت رقم',`**[ ${member.guild.memberCount} ]**`,true)
-    .setColor('GREEN')
-    .setFooter('The King Bot', 'https://cdn.discordapp.com/icons/390551815072251904/418fa2788d8115808951c9881ba8f190.jpg')
-
-var channel =member.guild.channels.find('name', 'bot')
-if (!channel) return;
-channel.send({embed : embed});
-});
 
 
 
@@ -1211,8 +1197,169 @@ m.sendMessage(args)
 
 
 
+	
+client.on('message', message => {
+const prefix = ".";
+  if (message.author.kick) return;  // Alpha Codes Ghost
+  if (!message.content.startsWith(prefix)) return;
+
+  let command = message.content.split(" ")[0];
+  command = command.slice(prefix.length);
+
+  let args = message.content.split(" ").slice(1);
+
+  if (command == "kick") {
+               if(!message.channel.guild) return;
+         
+  if(!message.guild.member(message.author).hasPermission("KICK_MEMBERS")) return message.reply("You Don't Have KICK_MEMBERS Permission").then(msg => msg.delete(5000));
+  if(!message.guild.member(client.user).hasPermission("KICK_MEMBERS")) return message.reply("I Don't Have KICK_Members Permission");
+  let user = message.mentions.users.first();
+  let reason = message.content.split(" ").slice(2).join(" ");
+
+  if (message.mentions.users.size < 1) return message.reply("منشن شخص");  // Alpha Codes Ghost
+  if(!reason) return message.reply ("**Text KICK Reason**");
+  if (!message.guild.member(user)
+  .bannable) return message.reply("لايمكنني طرد شخص اعلى من رتبتي");
+
+  message.guild.member(user).kick(7, user);
+
+  const banembed = new Discord.RichEmbed()  // Alpha Codes Ghost
+  .setAuthor('Kicked !', user.displayAvatarURL)
+  .setColor("RANDOM")
+  .setTimestamp()
+  .addField("User:",  `[ + ${user.tag} + ]`)
+  .addField("By:", `[  + ${message.author.tag} +  ]`)  // Alpha Codes Ghost
+  .addField("Reason:", `[ + ${reason} +  ]`)
+  client.channels.get("519259147967922176").send({embed : banembed})
+}
+});
 
 
+
+
+
+
+
+
+
+
+client.on('message', async message => {
+  let args = message.content.split(" ");
+  if(message.content.startsWith(prefix + "mute")) {
+    if(!message.member.hasPermission("MUTE_MEMBERS")) return message.channel.send('').then(msg => {  // Alpha Codes Ghost
+      msg.delete(3500);
+      message.delete(3500);
+    });
+ 
+    if(!message.guild.member(client.user).hasPermission("MUTE_MEMBERS")) return message.channel.send('').then(msg => {
+      msg.delete(3500);
+      message.delete(3500);
+    });
+ 
+    let mention = message.mentions.members.first();
+    if(!mention) return  message.channel.send('').then(msg => {  // Alpha Codes Ghost
+      msg.delete(3500);
+      message.delete(3500);
+    });
+ 
+    if(mention.id === message.author.id) return message.channel.send('**:x:You Cannot give mute to your self**').then(msg => { // Alpha Codes Ghost
+	
+      message.delete(3500);
+    });
+   
+    if(mention.hasPermission('ADMINISTRATOR')) return message.channel.send(`**:x: لا يمكن آعطاء ميوت لادارة السيرفر**`); 
+ 
+    if(message.guild.member(mention).roles.find('name', 'Muted')) return message.channel.send(`**:information_source: ${mention.user.username} Already Muted**`);// Alpha Codes Ghost
+ 
+   
+    if(mention.position >= message.guild.member(message.author).positon) return message.channel.send('You Donot Have Permission **Muted_Members** ').then(msg => {
+      msg.delete(3500);
+      message.delete(3500);
+    });
+   
+    if(mention.positon >= message.guild.member(client.user).positon) return message.channel.send('I Donot Have Permission **Muted_Members**').then(msg => { // Alpha Codes Ghost
+      msg.delete(3500);
+      message.delete(3500); 
+    });
+   
+    let duration = args[2];
+    if(!duration) message.channel.send(`**:hash: You Can Use ${prefix}mute @user Time Reason**`).then(msg => {
+      msg.delete(3500);
+      message.delete(3500);
+    });
+ 
+    if(isNaN(duration))  message.channel.send('').then(msg => {
+      msg.delete(3500);
+      message.delete(3500);
+    });
+ 
+    let reason = message.content.split(" ").slice(3).join(" "); // Alpha Codes Ghost
+    if(!reason) reason = " [ **لم يذكر لماذا** ] ";
+ 
+    let thisEmbed = new Discord.RichEmbed()
+    .setAuthor(mention.user.username, mention.user.avatarURL)
+    .setTitle('**تم آعطائك ميوت**')
+    .addField('**__السيرفر__**',[ message.guild.name ]) 
+    .addField('**__تم آعطائك ميوت بواسطة__**', [ message.author ])
+    .addField('**__آلسبب__**',reason)
+    .addField('**__وقت الميوت__**',duration) // Alpha Codes Ghost
+ 
+    let role = message.guild.roles.find('name', 'Muted') || message.guild.roles.get(r => r.name === 'Muted');
+    if(!role) try {
+      message.guild.createRole({
+        name: "Muted",
+        permissions: 0 
+      }).then(r => {
+        message.guild.channels.forEach(c => {
+          c.overwritePermissions(r , {
+            SEND_MESSAGES: false,  // Alpha Codes Ghost
+            READ_MESSAGES_HISTORY: false,
+            ADD_REACTIONS: false
+          });
+        });
+      }); 
+    } catch(e) {
+      console.log(e.stack);
+    }
+    mention.addRole(role).then(() => {
+      mention.send(thisEmbed); // Alpha Codes Ghost
+      message.channel.send(`**:white_check_mark: ${mention.user.username}  Muted! :zipper_mouth:  **  `);
+      mention.setMute(true); 
+    });
+    setTimeout(() => {
+      if(duration === 0) return;
+      mention.setMute(false);
+      mention.removeRole(role)
+    },duration * 60000); 
+  } // Alpha Codes Ghost
+});
+client.on('message', async message => {
+    let mention = message.mentions.members.first();
+let command = message.content.split(" ")[0];
+     command = command.slice(prefix.length);
+    let args = message.content.split(" ").slice(1);  
+if(command === `unmute`) {2
+  if(!message.member.hasPermission("MUTE_MEMBERS")) return message.channel.sendMessage("**You Donot HavePermission Mute_Members**").then(m => m.delete(5000));
+if(!message.guild.member(client.user).hasPermission("MUTE_MEMBERS")) return message.reply("**I donot Have Permission Mute_Members**").then(msg => msg.delete(6000))
+ 
+  let kinggamer = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
+     if(!kinggamer) return message.channel.send('').then(msg => {
+      msg.delete(3500);
+      message.delete(3500); 
+    }); // Alpha Codes Ghost
+ 
+  let role = message.guild.roles.find (r => r.name === "Muted");
+ 
+  if(!role || !kinggamer.roles.has(role.id)) return message.channel.sendMessage(`**:information_source:${mention.user.username} لقد تم فك الميوت عنه مسبقا**`)
+ 
+  await kinggamer.removeRole(role) 
+  message.channel.sendMessage(`**:white_check_mark: ${mention.user.username}  Unmuted! **`);
+ 
+  return;
+ 
+  }
+ 
+});
 
 
 
