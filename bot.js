@@ -57,6 +57,8 @@ client.on('message', msg => {
  ❖ +pes15
  ❖ +say ➾ for Repeat your words whith bot | بوت يكرر كلامك
  ❖ +server ➾ to give you info about the server | معلومات عن السيرفر
+ ❖ +mute  ➾ To give member muted | لاعطاء العضو ميوت
+ ❖ +unmute ➾ to unmute mebmer | لازلة الميوت
 ╔[❖══════ஜ۩۞۩ஜ══════❖]╗
    General  ✻ Commands
 ╚[❖══════ஜ۩۞۩ஜ══════❖]╝
@@ -74,12 +76,10 @@ client.on('message', msg => {
 ❖ +date ➾ to show your what your time | عشان توريك كم الوقت عندك
 ❖ +List_emoji ➾ to show you all emoji in the server | عشان يوريك كل اموجي السيرفر
 ❖ +uptime | new codes
-❖ ++ping | new codes
+❖ +ping | new codes
 ❖ +roll <numbers> | new codes
-❖ +credit | NOT READY
-❖ +daily | NOT READY
 ==================================================================
-Server support : https://discord.gg/GtPZZvw
+Server support : https://discord.gg/wuSWahQ
 ==================================================================
 ❤ Developer ❤  : <@288240894979604491>
 ==================================================================
