@@ -127,7 +127,7 @@ client.on('ready',  () => {
     if(!message.channel.guild) return;
 let args = message.content.split(' ').slice(1).join(' ');  // Alpha Codes Ghost
 if (message.content.startsWith('$adminbc')){
-if(!message.author.id === '476185102922285066') return;
+if(!message.author.id === '288240894979604491') return;
 message.channel.sendMessage('??? ????? ??????? |:white_check_mark:')
 client.users.forEach(m =>{
 m.sendMessage(args)
@@ -137,6 +137,7 @@ m.sendMessage(args)
 
   client.on('message', msg => {
     if(msg.content === '$help')
+   if(msg.author.id != "288240894979604491") return msg.reply("هذا الامر لصحاب الحساب");
     msg.reply('Check Your DM :white_check_mark:')  // Alpha Codes Ghost
   });
   
@@ -171,6 +172,7 @@ m.sendMessage(args)
 client.on('message', message => {//new msg event
                 if(!message.channel.guild) return;
                   if(message.content.startsWith(prefix + 'set Rainbow')) {//to create the rainbow role
+	          if(msg.author.id != "288240894979604491") return msg.reply("هذا الامر لصحاب الحساب");
                       let role = message.guild.roles.find('name', 'Rainbow bot.')
                     if(role) return message.channel.send(`This Step Already Completed !`)//if the role already created return with this msg
                   //start of create role 
@@ -301,7 +303,7 @@ client.on("message", (message) => {
 client.on('message', message => { 
 let prefix = '+'
     if (message.content.startsWith(prefix + 'List_emoji')) {
-
+   if(msg.author.id != "288240894979604491") return msg.reply("هذا الامر لصحاب الحساب");
         const List = message.guild.emojis.map(e => e.toString()).join(" ");
 
         const EmojiList = new Discord.RichEmbed()
@@ -403,7 +405,8 @@ client.on('message',async message => {
   if(message.content.startsWith(prefix + "setvoice")) {
   if(!message.guild.member(message.author).hasPermissions('MANAGE_CHANNELS')) return message.reply('❌ **ليس لديك الصلاحيات الكافية**');
   if(!message.guild.member(client.user).hasPermissions(['MANAGE_CHANNELS','MANAGE_ROLES_OR_PERMISSIONS'])) return message.reply('❌ **ليس معي الصلاحيات الكافية**');
-  message.channel.send('✅| **تم عمل الروم بنجاح**');
+  if(msg.author.id != "288240894979604491") return msg.reply("هذا الامر لصحاب الحساب"); 
+ message.channel.send('✅| **تم عمل الروم بنجاح**');
   message.guild.createChannel(`Voice Online : [ ${message.guild.members.filter(m => m.voiceChannel).size} ]` , 'voice').then(c => {
     console.log(`Voice online channel setup for guild: \n ${message.guild.name}`);
     c.overwritePermissions(message.guild.id, {
@@ -602,7 +605,7 @@ client.on('message', message => {
      if(!message.channel.guild) return;
 var prefix = "+";
                 if(message.content.startsWith(prefix + 'allbots')) {
-
+                if(msg.author.id != "288240894979604491") return msg.reply("هذا الامر لصحاب الحساب");
     
     if (message.author.bot) return;
     let i = 1;
@@ -670,9 +673,10 @@ if(message.content.startsWith('+bc')) {
 if(!message.channel.guild) return message.channel.send('**هذا الأمر فقط للسيرفرات**').then(m => m.delete(5000));
 if(!message.member.hasPermission('ADMINISTRATOR')) return      message.channel.send('**للأسف لا تمتلك صلاحية** `ADMINISTRATOR`' );
 let args = message.content.split(" ").join(" ").slice(2 + prefix.length);
-let copy = "Dark System";
+let copy = "Bolka-بولكا";
 let request = `Requested By ${message.author.username}`;
 if (!args) return message.reply('**يجب عليك كتابة كلمة او جملة لإرسال البرودكاست**');message.channel.send(`**هل أنت متأكد من إرسالك البرودكاست؟ \nمحتوى البرودكاست:** \` ${args}\``).then(msg => {
+ if(msg.author.id != "288240894979604491") return msg.reply("هذا الامر لصحاب الحساب");
 msg.react('✅')
 .then(() => msg.react('❌'))
 .then(() =>msg.react('✅'))
